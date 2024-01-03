@@ -1,5 +1,6 @@
 // import necessary modules
 import express from 'express';
+import methodOverride from 'method-override';
 import path from 'path';
 import fs from 'fs';
 import { Post, postReviver } from './postsObj.mjs';
@@ -40,39 +41,50 @@ app.use(express.urlencoded({ extended: false }));
 // Set up static route
 app.use('/public', express.static(path.join(process.cwd(), 'public')));
 
+// Use method override
+app.use(methodOverride('_method'));
+
 // Define routes
+
+// Default route
 app.get('/', (req, res) => {
   res.render('index', { posts });
-  // res.render('index', { items: items, categories: categories, selectedItem: null });
 });
 
+// Displays post with given ID
 app.get('/read/:postId', (req, res) => {
   const { postId } = req.params;
   const selectedPost = posts.find((post) => post.uuid === postId);
   res.render('read', { post: selectedPost });
 });
 
+// Display Post creation interface
 app.get('/post', (req, res) => {
   res.render('post');
 });
 
+// Display editor version of post creation interface
 app.get('/post/:postId', (req, res) => {
   res.render('post');
 });
 
+// Display Post management interface
 app.get('/manage', (req, res) => {
   res.render('manage');
 });
 
+// Add new post
 app.post('/add', (req, res) => {
   res.redirect('/');
 });
 
-app.post('/edit', (req, res) => {
+// Edit existing post
+app.put('/edit', (req, res) => {
   res.redirect('/');
 });
 
-app.post('/delete', (req, res) => {
+// Delete Post
+app.delete('/delete', (req, res) => {
   res.redirect('/');
 });
 
