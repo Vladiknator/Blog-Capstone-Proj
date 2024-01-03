@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 app.get('/read/:postId', (req, res) => {
   const { postId } = req.params;
   const selectedPost = posts.find((post) => post.uuid === postId);
-  res.render('read');
+  res.render('read', { post: selectedPost });
 });
 
 app.get('/post', (req, res) => {
