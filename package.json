@@ -12,7 +12,19 @@
   "eslintConfig": {
     "extends": [
       "wesbos"
-    ]
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "endOfLine": "auto",
+          "tabWidth": 2,
+          "max_line_length": 120
+        }
+      ]
+    }
+    
   },
   "eslintIgnore": [
     "*.ejs"
@@ -23,13 +35,18 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "isomorphic-dompurify": "^2.0.0",
+    "method-override": "^3.0.0",
+    "postsobj": "file:../postsObj",
+    "sanitize-html": "^2.11.0",
+    "tinymce": "^6.8.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-wesbos": "^4.0.1",
-    "eslint-plugin-import": "^2.29.1",
-    "express": "^4.18.2",
-    "method-override": "^3.0.0",
-    "postsobj": "file:../postsObj",
-    "uuid": "^9.0.1"
+    "eslint-plugin-import": "^2.29.1"
   }
 }

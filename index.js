@@ -1,9 +1,14 @@
 // import necessary modules
 import express from 'express';
 import methodOverride from 'method-override';
-import path from 'path';
+import path, { dirname } from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import sanitizeHtml from 'sanitize-html';
+import pkg from 'isomorphic-dompurify';
 import { Post, postReviver } from './postsObj.mjs';
+
+const { sanitize } = pkg;
 
 // read posts from json file
 let posts = [];
@@ -25,6 +30,9 @@ async function readJsonFile(filename) {
   }
 }
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // Write contents of JSON to posts array
 posts = await readJsonFile('posts.json');
 
@@ -43,6 +51,12 @@ app.use('/public', express.static(path.join(process.cwd(), 'public')));
 
 // Use method override
 app.use(methodOverride('_method'));
+
+// Use Tiny MCE
+app.use(
+  '/tinymce',
+  express.static(path.join(__dirname, 'node_modules', 'tinymce')),
+);
 
 // Define routes
 
@@ -75,6 +89,12 @@ app.get('/manage', (req, res) => {
 
 // Add new post
 app.post('/add', (req, res) => {
+  console.log(req.body.title);
+  const postTitle = req.body.title;
+  const postBody = sanitize(req.body.body);
+  const newPost = new Post(postTitle, postBody);
+  console.log(newPost.toString());
+  posts.push(newPost);
   res.redirect('/');
 });
 

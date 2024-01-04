@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Create New Blog Post</h1>
+    <form action="/add" method="post">
+      <input type="text" name="title" />
+      <textarea id="my-expressjs-tinymce-app" name="body">Hello, World!</textarea>
+      <button type="submit">Post</button>
+    </form>
+    <!-- Script element sourcing TinyMCE -->
+    <script type="application/javascript" src="/tinymce/tinymce.min.js"></script>
+    <!-- Script element sourcing the TinyMCE configuration -->
+    <script type="application/javascript" src="/public/javascript/my-tinymce-config.js"></script>
+  </body>
+</html>
