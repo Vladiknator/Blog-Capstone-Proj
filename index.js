@@ -12,7 +12,7 @@ import { Post, postReviver } from './postsObj.mjs';
 
 const { sanitize } = pkg;
 
-// read posts from json file
+// var to store posts array
 let posts = [];
 
 // Define an async function that reads a json file and writes it to a variable
@@ -46,6 +46,7 @@ async function writeJsonFile(filename, jsonData) {
   }
 }
 
+// Setup dirname and filename constants
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -94,35 +95,46 @@ app.get('/post', (req, res) => {
 });
 
 // Display editor version of post creation interface
-app.get('/post/:postId', (req, res) => {
-  res.render('post');
+app.get('/post/:postUUID', (req, res) => {
+  const { postUUID } = req.params;
+  const selectedPost = posts.find((post) => post.uuid === postUUID);
+  res.render('post', { post: selectedPost });
 });
 
 // Display Post management interface
 app.get('/manage', (req, res) => {
-  res.render('manage');
+  res.render('manage', { posts, clip: clip.default });
 });
 
 // Add new post
 app.post('/add', (req, res) => {
-  console.log(req.body.title);
   const postTitle = req.body.title;
   const postBody = sanitize(req.body.body);
   const newPost = new Post(postTitle, postBody);
-  console.log(newPost.toString());
   posts.push(newPost);
   writeJsonFile('posts.json', JSON.stringify(posts));
-  res.redirect('/');
+  res.redirect('/manage');
 });
 
 // Edit existing post
 app.put('/edit', (req, res) => {
-  res.redirect('/');
+  const postTitle = req.body.title;
+  const postBody = sanitize(req.body.body);
+  const postUUID = req.body.uuid;
+  const postIndex = posts.findIndex((post) => post.uuid === postUUID);
+  posts[postIndex].setTitle(postTitle);
+  posts[postIndex].setBody(postBody);
+  writeJsonFile('posts.json', JSON.stringify(posts));
+  res.redirect('/manage');
 });
 
 // Delete Post
-app.delete('/delete', (req, res) => {
-  res.redirect('/');
+app.delete('/delete/:postUUID', (req, res) => {
+  // console.log(`delete ${req.params.postId}`);]
+  const { postUUID } = req.params;
+  posts = posts.filter((post) => post.uuid !== postUUID);
+  writeJsonFile('posts.json', JSON.stringify(posts));
+  res.redirect('/manage');
 });
 
 // Start the server

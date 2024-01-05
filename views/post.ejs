@@ -6,10 +6,13 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Create New Blog Post</h1>
-    <form action="/add" method="post">
-      <input type="text" name="title" />
-      <textarea id="my-expressjs-tinymce-app" name="body">Hello, World!</textarea>
+    <h1><%= locals.post ? "Edit Blog Post" : "Create New Blog Post" %></h1>
+    <form action="<%= locals.post ? "/edit?_method=PUT" : '/add' %>" method="post">
+      <input type="text" name="title" value="<%= locals.post ? post.title : '' %>" placeholder="Title of Post" />
+      <textarea id="my-expressjs-tinymce-app" name="body"><%= locals.post ? post.body : '' %></textarea>
+      <% if (locals.post) { %>
+      <input type="hidden" name="uuid" value="<%= post.uuid %>">
+      <% }; %>
       <button type="submit">Post</button>
     </form>
     <!-- Script element sourcing TinyMCE -->

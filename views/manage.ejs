@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Management Interface</h1>
+
+    <%# Loop through the posts, add each posts title and body to the page %>
+    <% posts.forEach(post => { %>
+    
+        <h2><a href="/read/<%= post.uuid %>"><%= post.title %></a></h2>
+
+        <form action="/post/<%= post.uuid %>" >
+            <input type="submit" value="Edit Post" />
+        </form>
+
+        <form action="/delete/<%= post.uuid %>?_method=DELETE" method="post">
+            <input type="submit" value="Delete" />
+        </form>
+        
+        <p><%= post.date %></p>
+
+        <p><%- clip(post.body, 100, {html:true, maxLines: 2 }) %></p>
+
+    <% }) %>
+
+  </body>
+</html>

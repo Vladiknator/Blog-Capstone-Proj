@@ -23,7 +23,7 @@ class Post {
     title,
     body,
     uuid = uuidv4(),
-    date = new Date().toLocaleString({
+    date = new Date().toLocaleString('en-US', {
       weekday: 'short',
       year: 'numeric',
       month: 'short',
