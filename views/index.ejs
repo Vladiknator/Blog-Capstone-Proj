@@ -12,8 +12,9 @@
     <% posts.forEach(post => { %>
     
         <h2><a href="/read/<%= post.uuid %>"><%= post.title %></a></h2>
+        <p><%= post.date %></p>
 
-        <p><%- post.body %></p>
+        <p><%- clip(post.body, 100, {html:true, maxLines: 2 }) %></p>
 
     <% }) %>
 

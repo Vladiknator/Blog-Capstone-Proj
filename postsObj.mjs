@@ -4,8 +4,8 @@ export { Post, postReviver };
 
 // reviver function to revive the objects from the JSON file back into instances of Post
 function postReviver(key, value) {
-  if (value?.title && value?.body && value?.uuid)
-    return new Post(value.title, value.body, value.uuid);
+  if (value?.title && value?.body && value?.uuid && value?.date)
+    return new Post(value.title, value.body, value.uuid, value.date);
   return value;
 }
 
@@ -17,10 +17,23 @@ class Post {
 
   #uuid;
 
-  constructor(title, body, uuid = uuidv4()) {
+  #date;
+
+  constructor(
+    title,
+    body,
+    uuid = uuidv4(),
+    date = new Date().toLocaleString({
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }),
+  ) {
     this.#title = title;
     this.#body = body;
     this.#uuid = uuid;
+    this.#date = date;
   }
 
   get title() {
@@ -35,6 +48,10 @@ class Post {
     return this.#uuid;
   }
 
+  get date() {
+    return this.#date;
+  }
+
   setTitle(title) {
     this.#title = title;
   }
@@ -44,10 +61,15 @@ class Post {
   }
 
   toJSON() {
-    return { title: this.#title, body: this.#body, uuid: this.#uuid };
+    return {
+      title: this.#title,
+      body: this.#body,
+      uuid: this.#uuid,
+      date: this.#date,
+    };
   }
 
   toString() {
-    return `Title: ${this.title}, Body: ${this.body}, ID: ${this.uuid}`;
+    return `Title: ${this.title}, Body: ${this.body}, ID: ${this.uuid}, Date: ${this.date}`;
   }
 }

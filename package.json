@@ -24,11 +24,15 @@
         }
       ]
     }
-    
   },
   "eslintIgnore": [
     "*.ejs"
   ],
+  "nodemonConfig": {
+    "ignore": [
+      "posts.json"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -40,6 +44,7 @@
     "method-override": "^3.0.0",
     "postsobj": "file:../postsObj",
     "sanitize-html": "^2.11.0",
+    "text-clipper": "^2.2.0",
     "tinymce": "^6.8.2",
     "uuid": "^9.0.1"
   },

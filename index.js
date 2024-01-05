@@ -6,6 +6,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import sanitizeHtml from 'sanitize-html';
 import pkg from 'isomorphic-dompurify';
+import clip from 'text-clipper';
+
 import { Post, postReviver } from './postsObj.mjs';
 
 const { sanitize } = pkg;
@@ -23,6 +25,20 @@ async function readJsonFile(filename) {
     const json = JSON.parse(data, postReviver);
     // Return the variable
     return json;
+  } catch (error) {
+    // Log the error and rethrow it
+    console.error(error);
+    throw error;
+  }
+}
+
+// Define async function to write to json file
+async function writeJsonFile(filename, jsonData) {
+  // Use a try-catch block to handle errors
+  try {
+    // Use fs.promises.readFile to write the file
+    const out = fs.promises.writeFile(filename, jsonData);
+    return out;
   } catch (error) {
     // Log the error and rethrow it
     console.error(error);
@@ -62,7 +78,7 @@ app.use(
 
 // Default route
 app.get('/', (req, res) => {
-  res.render('index', { posts });
+  res.render('index', { posts, clip: clip.default });
 });
 
 // Displays post with given ID
@@ -95,6 +111,7 @@ app.post('/add', (req, res) => {
   const newPost = new Post(postTitle, postBody);
   console.log(newPost.toString());
   posts.push(newPost);
+  writeJsonFile('posts.json', JSON.stringify(posts));
   res.redirect('/');
 });
 

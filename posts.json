@@ -1,1 +1,14 @@
-[{"uuid":"75498497-d152-4718-a3b8-3ce77ca072fe","title":"title1","body":"body1"},{"uuid":"f97ef82e-b838-4b08-b183-0367a1bea6a1","title":"title2","body":"body2"}]
+[
+    {
+        "title": "Journey into JavaScript",
+        "body": "<p>Welcome to our first blog post! Today, we're diving into the world of JavaScript, a powerful scripting language that powers the dynamic behavior on most websites.</p>\n<p>JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. <br>It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.&nbsp;<br>It's used to add interactive elements to the websites and plays a key role in modern web development.</p>\n<p>Stay tuned for our next post where we'll delve deeper into JavaScript and explore its various features and capabilities. Happy coding!</p>",
+        "uuid": "70594c18-ed9b-439e-a115-a0ee60b55e7f",
+        "date": "1/4/2024, 4:00:32 PM"
+    },
+    {
+        "title": "Exploring Python: A Snake’s Guide to Programming",
+        "body": "<p>Hello fellow coders! In today's post, we're exploring Python, a versatile language known for its simplicity and readability.</p>\n<p>Python is an interpreted, high-level, general-purpose programming language. <br>Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace.</p>\n<p>Whether you're a beginner just starting out or an experienced developer looking for a refresher, we hope this post serves as a helpful guide on your Python programming journey. <br>Keep an eye out for our next post where we'll dive into Python's many libraries and frameworks. Until then, happy coding!</p>",
+        "uuid": "2143d2d4-995c-4880-b5c4-8b59b187799a",
+        "date": "1/4/2024, 4:02:34 PM"
+    }
+]
