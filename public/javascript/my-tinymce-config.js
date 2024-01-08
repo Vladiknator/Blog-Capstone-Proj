@@ -3,6 +3,7 @@ tinymce.init({
   selector: 'textarea#my-expressjs-tinymce-app',
   height: 500,
   menubar: false,
+  content_css: '/public/styles/style.css',
   setup(editor) {
     editor.on('change', () => {
       // eslint-disable-next-line no-undef

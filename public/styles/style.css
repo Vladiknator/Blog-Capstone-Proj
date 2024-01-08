@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;500&display=swap');
+
+#title {
+    text-align: center;
+    font-family: 'Mulish', sans-serif;
+    border-bottom: 1px solid;
+    border-color: black;
+}
+
+h1>a {
+    color: inherit;
+    text-decoration: none; /* no underline */
+    cursor:pointer;
+  }
+
+#content {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: 300;
+    font-family: 'Mulish', sans-serif;
+}
+
+a {
+    color: black;
+}
+
+.controls {
+    display: inline-block;
+    width: auto;
+}
+
+.controls > input {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    cursor:pointer;
+}
+
+.controls > input:hover {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    background-color: aliceblue;
+    border-width: 1px;
+}
+
+#edit {
+    border-right: none;
+    border-radius: 5px 0px 0px 5px;
+}
+
+#delete{
+    border-radius: 0px 5px 5px 0px;
+}
+
+form input[type=text] {
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 2rem;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #eeeeeeee;
+    border-style: solid;
+}
+
+button {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    cursor:pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #eeeeeeee;
+    border-style: solid;
+}
